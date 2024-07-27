@@ -30,7 +30,7 @@ def fetch_roles():
     muted_role = None
 
     for role in roles_data:
-        role_name = role.get('role_type')  # Assurez-vous d'utiliser 'role_type' ici
+        role_name = role.get('role_type') 
         role_id = role.get('role_id')
 
         if role_name == "admin":
@@ -68,7 +68,7 @@ def list_roles():
     roles = roles_collection.find()
     role_list = []
     for role in roles:
-        role_name = role.get('role_name', 'Unknown')  # Valeur par défaut si le champ est absent
+        role_name = role.get('role_name', 'Unknown') 
         role_id = role.get('role_id', 'Unknown')
         role_type = role.get('role_type', 'Unknown')
         role_list.append(f"Name: {role_name}, ID: {role_id}, Type: {role_type}")
