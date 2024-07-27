@@ -1,6 +1,6 @@
 # Discord Moderation Bot
 
-This is a Discord moderation bot built using `discord.py` and MongoDB, with additional web pages for displaying database information.
+This is a Discord moderation bot built using `discord.py`, pymongo and flask, with additional web pages for displaying database information.
 
 ## Features
 
