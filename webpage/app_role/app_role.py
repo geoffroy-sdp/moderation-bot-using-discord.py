@@ -30,5 +30,5 @@ def roles():
 @roles_bp.route('/api/roles', methods=['GET'])
 def get_roles():
     roles_collection = connect_db()
-    roles_data = list(roles_collection.find({}, {'_id': 0}))  # Exclure le champ _id
+    roles_data = list(roles_collection.find({}, {'_id': 0}))  
     return jsonify(roles_data)
