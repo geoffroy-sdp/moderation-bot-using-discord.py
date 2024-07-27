@@ -21,7 +21,7 @@ This is a Discord moderation bot built using `discord.py` and MongoDB, with addi
 - - create a cluster
   - - create a database "**UR_DATABASE_NAME**"
     - - create 4 collection :
-      - * "**FIRST_COLLECTION**"
+        * "**FIRST_COLLECTION**"
         * "**SECOND_COLLECTION**"
         * "**THIRD_COLLECTION**"
         * "**FOURTH_COLLECTION**"
