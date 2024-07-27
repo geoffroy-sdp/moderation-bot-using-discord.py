@@ -5,7 +5,7 @@ banned_word_bp = Blueprint('banned_word', __name__, template_folder='templates')
 
 @banned_word_bp.route('/')
 def banned_word_index():
-    return render_template('banned_word.html')  # Page principale avec style
+    return render_template('banned_word.html') 
 
 @banned_word_bp.route('/banned_words', methods=['GET'])
 def banned_words():
