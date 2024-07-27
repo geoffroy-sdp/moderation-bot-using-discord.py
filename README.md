@@ -12,6 +12,9 @@ This is a Discord moderation bot built using `discord.py`, pymongo and flask, wi
 ## Setup
 
 ### Installation
+```bash
+gh repo clone Merzouz-ui/moderation-bot-using-discord.py
+```
 - Update `config.json` With **EVERYTHING**
     - **dev** and **admin**, are the id on discord of the dev and admin
 - Install the dependencies:
