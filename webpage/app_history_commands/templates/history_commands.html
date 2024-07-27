@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historique des Commandes</title>
+    <style>
+        body {
+            background-color: #2f3136;
+            color: #ffffff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #7289da;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            border: 1px solid #40444b;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #7289da; 
+        }
+        tr:nth-child(even) {
+            background-color: #35393e;
+        }
+        .reset-button {
+            padding: 10px;
+            background-color: #ff4757; /* Couleur rouge pour le bouton */
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>/command History</h1>
+    <button class="reset-button" onclick="resetCommandHistory()">Reset History</button>
+    <table>
+        <thead>
+            <tr>
+                <th>ID User</th>
+                <th>User Name</th>
+                <th>Command</th>
+                <th>Date</th>
+            </tr>
+        </thead>
+        <tbody id="commands-table-body">
+            <!-- Les lignes des commandes seront ajoutées ici dynamiquement -->
+        </tbody>
+    </table>
+
+    <script>
+        async function fetchCommandHistory() {
+    try {
+        const response = await fetch('/commands/api/command_history');
+        const commands = await response.json();
+        const tableBody = document.getElementById('commands-table-body');
+        tableBody.innerHTML = '';  // Vider les lignes existantes
+
+        commands.forEach(command => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${command.user_id}</td>
+                <td>${command.username}</td>
+                <td>${command.command}</td>
+                <td>${command.date}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+    } catch (error) {
+        console.error('Erreur lors de la récupération de l\'historique des commandes :', error);
+    }
+}
+
+
+        async function resetCommandHistory() {
+            try {
+                const response = await fetch('/commands/api/reset_command_history', { method: 'POST' });
+                if (response.ok) {
+                    alert('Historique réinitialisé avec succès !');
+                    fetchCommandHistory();  // Refresh table after reset
+                } else {
+                    alert('Erreur lors de la réinitialisation de l\'historique.');
+                }
+            } catch (error) {
+                console.error('Error resetting command history:', error);
+            }
+        }
+
+        window.onload = fetchCommandHistory;
+    </script>
+</body>
+</html>

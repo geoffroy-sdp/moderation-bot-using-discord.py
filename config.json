@@ -1,0 +1,17 @@
+{
+    "token": "MTI1OTI3NjU5Nzk5MTcwNjYyNA.Gw8qGB.43FBx-1J6h70ExVTNPAVuVJsf_ukdLabNDSihE",
+    "Guild": "1247845419481043027",
+    
+    "MONGO_URI":"mongodb+srv://tradexbmerzouz:OZI_ANTI-SASSY_APP@ozisassy.crqfklt.mongodb.net/",
+    "DB_NAME":"discord_bot",
+    "DB_COLLECTION_BANNEDS_WORDS":"banned_words",
+    "DB_COLLECTION_COMMANDS_HISTORY":"commands_history",
+    "DB_COLLECTION_USER_SANCTIONS":"history",
+    "DB_COLLECTION_ROLES":"roles",
+    
+    "dev": "714784657392009296",
+    "admin": "558108573687873541",
+
+    "moderator_channel" : "1260332812502827011"  
+  }
+  

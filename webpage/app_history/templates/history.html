@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestion des Sanctions</title>
+    <style>
+        body {
+            background-color: #2f3136; 
+            color: #ffffff; 
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #7289da; 
+        }
+        .search-bar {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #40444b; 
+            color: #ffffff; 
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: #40444b; 
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #7289da; 
+        }
+        tr:nth-child(even) {
+            background-color: #2f3136; 
+        }
+        #buttonContainer {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 20px;
+        }
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            cursor: pointer;
+            margin-left: 10px;
+        }
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+    <h1>Warning History</h1>
+    <div id="buttonContainer">
+        <input type="text" id="search-bar" class="search-bar" placeholder="Search for a user" onkeyup="filterSanctions()">
+        <button id="resetAllBtn" onclick="resetAllSanctions()">RESET EVERYTHING</button>
+    </div>
+    <table>
+        <thead>
+            <tr>
+                <th>User ID</th>
+                <th>Username</th>
+                <th>Sanction Points</th>
+                <th>Last Updated</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody id="sanctionContainer"></tbody>
+    </table>
+
+    <script>
+        let sanctions = [];
+
+        async function fetchSanctions() {
+            const response = await fetch('/history/api/sanctions');
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement des sanctions');
+            }
+            sanctions = await response.json();
+            displaySanctions(sanctions);
+        }
+
+        function displaySanctions(sanctionsToDisplay) {
+            const sanctionContainer = document.getElementById('sanctionContainer');
+            sanctionContainer.innerHTML = ''; 
+            sanctionsToDisplay.forEach(sanction => {
+                const sanctionRow = document.createElement('tr');
+                sanctionRow.innerHTML = `
+                    <td>${sanction.user_id}</td>
+                    <td>${sanction.username}</td>
+                    <td>${sanction.sanction_points}</td>
+                    <td>${sanction.last_updated}</td>
+                    <td>${sanction.status}</td>
+                `;
+                sanctionContainer.appendChild(sanctionRow);
+            });
+        }
+
+        function filterSanctions() {
+            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            const filteredSanctions = sanctions.filter(sanction => 
+                sanction.username.toLowerCase().includes(searchTerm)
+            );
+            displaySanctions(filteredSanctions);
+        }
+
+        async function resetAllSanctions() {
+            const response = await fetch('/history/api/reset_sanctions', { method: 'POST' });
+            if (response.ok) {
+                alert('Toutes les sanctions ont été réinitialisées.');
+                fetchSanctions();
+            } else {
+                alert('Erreur lors de la réinitialisation des sanctions');
+            }
+        }
+
+        // Récupérer et afficher toutes les sanctions au chargement de la page
+        window.onload = fetchSanctions;
+    </script>
+</body>
+</html>

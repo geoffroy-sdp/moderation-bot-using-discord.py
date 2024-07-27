@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <style>
+        body {
+            background-color: #2f3136; /* Discord background color */
+            color: #ffffff; /* Text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #7289da; /* Discord purple */
+            text-align: center;
+        }
+        .nav-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 20px;
+        }
+        .nav-button {
+            background-color: #40444b; /* Darker button background */
+            color: #ffffff; /* Button text color */
+            border: none;
+            border-radius: 5px;
+            padding: 15px 20px;
+            margin: 10px;
+            width: 200px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        .nav-button:hover {
+            background-color: #5b5e61; /* Hover effect color */
+        }
+    </style>
+</head>
+<body>
+    <h1>Dashboard</h1>
+    <div class="nav-container">
+        <a href="/history" class="nav-button">Sanctions history</a>
+        <a href="/roles" class="nav-button">List roles</a>
+        <a href="/commands" class="nav-button">/command history</a>
+        <a href="/banned_word" class="nav-button">list banned word</a>
+    </div>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banned Words Management</title>
+    <style>
+        body {
+            background-color: #2f3136; /* Couleur de fond sombre */
+            color: #ffffff; /* Couleur du texte */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            color: #7289da; /* Couleur du titre */
+        }
+        .search-bar, .add-word-bar {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            background-color: #40444b; /* Couleur de fond pour les champs */
+            color: #ffffff; /* Couleur du texte */
+        }
+        .add-word-bar {
+            display: inline-block; /* Permet de garder le bouton à droite */
+            width: calc(80% - 10px); /* Laisse de l'espace pour le bouton */
+        }
+        .add-button {
+            background-color: #7289da; /* Couleur Discord pour le bouton */
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            padding: 10px;
+            cursor: pointer;
+            margin-left: 10px; /* Espace entre le champ et le bouton */
+            width: 15%; /* Largeur fixe pour le bouton */
+        }
+        .add-button:hover {
+            background-color: #5b6eae; /* Couleur plus foncée au survol */
+        }
+        .word {
+            background-color: #40444b; /* Couleur de fond des mots */
+            border-radius: 5px;
+            padding: 10px;
+            margin: 10px 0;
+            display: flex;
+            justify-content: space-between; /* Alignement des éléments */
+            align-items: center; /* Centrer verticalement */
+        }
+        .remove-button {
+            background-color: #ff4757; /* Couleur rouge pour le bouton */
+            border: none;
+            border-radius: 5px;
+            color: #ffffff;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+        .remove-button:hover {
+            background-color: #e84118; /* Couleur plus foncée au survol */
+        }
+    </style>
+</head>
+<body>
+    <h1>Banned Words Management</h1>
+    <input type="text" id="search-bar" class="search-bar" placeholder="Search a word..." onkeyup="filterWords()">
+    
+    <div>
+        <input type="text" id="add-word-bar" class="add-word-bar" placeholder="Add a word..." />
+        <button class="add-button" onclick="addWord()">ADD</button>
+    </div>
+    
+    <div id="bannedWordsContainer"></div>
+
+    <script>
+        let bannedWords = [];
+
+        async function fetchBannedWords() {
+            const response = await fetch('/banned_word/banned_words'); // Adjust URL based on your structure
+            if (!response.ok) {
+                throw new Error('Erreur lors du chargement des données');
+            }
+            bannedWords = await response.json();
+            displayWords(bannedWords);
+        }
+
+        function displayWords(wordsToDisplay) {
+            const bannedWordsContainer = document.getElementById('bannedWordsContainer');
+            bannedWordsContainer.innerHTML = ''; // Vider le contenu précédent
+            wordsToDisplay.forEach(word => {
+                const wordDiv = document.createElement('div');
+                wordDiv.className = 'word';
+                wordDiv.textContent = word;
+
+                // Ajout d'un bouton pour supprimer le mot
+                const removeButton = document.createElement('button');
+                removeButton.textContent = 'delete';
+                removeButton.className = 'remove-button'; // Classe pour le style
+                removeButton.onclick = () => removeWord(word);
+                wordDiv.appendChild(removeButton);
+
+                bannedWordsContainer.appendChild(wordDiv);
+            });
+        }
+
+        function filterWords() {
+            const searchTerm = document.getElementById('search-bar').value.toLowerCase();
+            const filteredWords = bannedWords.filter(word => 
+                word.toLowerCase().includes(searchTerm)
+            );
+            displayWords(filteredWords);
+        }
+
+        async function addWord() {
+            const newWord = document.getElementById('add-word-bar').value;
+            if (!newWord) return;
+
+            const response = await fetch('/banned_word/add', { // Adjust URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ word: newWord })
+            });
+
+            if (response.ok) {
+                bannedWords.push(newWord); // Ajouter le mot à la liste locale
+                displayWords(bannedWords);
+                document.getElementById('add-word-bar').value = ''; // Réinitialiser le champ d'ajout
+            } else {
+                alert('Erreur lors de l\'ajout du mot.');
+            }
+        }
+
+        async function removeWord(word) {
+            const response = await fetch('/banned_word/remove', { // Adjust URL
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ word: word })
+            });
+
+            if (response.ok) {
+                bannedWords = bannedWords.filter(w => w !== word); // Mettre à jour la liste
+                displayWords(bannedWords);
+            } else {
+                alert('Erreur lors de la suppression du mot.');
+            }
+        }
+
+        // Fetch and display all banned words on page load
+        window.onload = fetchBannedWords;
+    </script>
+</body>
+</html>
