@@ -12,7 +12,7 @@ This is a Discord moderation bot built using `discord.py` and MongoDB, with addi
 ## Setup
 
 ### Installation
-- Update `config.json` with your Discord bot token and MongoDB URI.
+- Update `config.json` With **EVERYTHING**
     - **dev** and **admin**, are the id on discord of the dev and admin
       (if you dont have any admin or dev for your bot, just let them empty)
 - Install the dependencies:
