@@ -84,7 +84,7 @@
         async function fetchSanctions() {
             const response = await fetch('/history/api/sanctions');
             if (!response.ok) {
-                throw new Error('Erreur lors du chargement des sanctions');
+                throw new Error('Error while loading');
             }
             sanctions = await response.json();
             displaySanctions(sanctions);
@@ -117,14 +117,13 @@
         async function resetAllSanctions() {
             const response = await fetch('/history/api/reset_sanctions', { method: 'POST' });
             if (response.ok) {
-                alert('Toutes les sanctions ont été réinitialisées.');
+                alert('its good');
                 fetchSanctions();
             } else {
-                alert('Erreur lors de la réinitialisation des sanctions');
+                alert('error');
             }
         }
 
-        // Récupérer et afficher toutes les sanctions au chargement de la page
         window.onload = fetchSanctions;
     </script>
 </body>
