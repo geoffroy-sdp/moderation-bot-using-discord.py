@@ -6,14 +6,14 @@
     <title>Banned Words Management</title>
     <style>
         body {
-            background-color: #2f3136; /* Couleur de fond sombre */
-            color: #ffffff; /* Couleur du texte */
+            background-color: #2f3136; 
+            color: #ffffff; 
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 20px;
         }
         h1 {
-            color: #7289da; /* Couleur du titre */
+            color: #7289da; 
         }
         .search-bar, .add-word-bar {
             width: 100%;
@@ -21,37 +21,37 @@
             margin: 10px 0;
             border-radius: 5px;
             border: none;
-            background-color: #40444b; /* Couleur de fond pour les champs */
-            color: #ffffff; /* Couleur du texte */
+            background-color: #40444b; 
+            color: #ffffff;
         }
         .add-word-bar {
-            display: inline-block; /* Permet de garder le bouton à droite */
-            width: calc(80% - 10px); /* Laisse de l'espace pour le bouton */
+            display: inline-block; 
+            width: calc(80% - 10px); 
         }
         .add-button {
-            background-color: #7289da; /* Couleur Discord pour le bouton */
+            background-color: #7289da;
             border: none;
             border-radius: 5px;
             color: #ffffff;
             padding: 10px;
             cursor: pointer;
-            margin-left: 10px; /* Espace entre le champ et le bouton */
-            width: 15%; /* Largeur fixe pour le bouton */
+            margin-left: 10px;
+            width: 15%; 
         }
         .add-button:hover {
-            background-color: #5b6eae; /* Couleur plus foncée au survol */
+            background-color: #5b6eae;
         }
         .word {
-            background-color: #40444b; /* Couleur de fond des mots */
+            background-color: #40444b;
             border-radius: 5px;
             padding: 10px;
             margin: 10px 0;
             display: flex;
-            justify-content: space-between; /* Alignement des éléments */
-            align-items: center; /* Centrer verticalement */
+            justify-content: space-between;
+            align-items: center; 
         }
         .remove-button {
-            background-color: #ff4757; /* Couleur rouge pour le bouton */
+            background-color: #ff4757; 
             border: none;
             border-radius: 5px;
             color: #ffffff;
@@ -59,7 +59,7 @@
             cursor: pointer;
         }
         .remove-button:hover {
-            background-color: #e84118; /* Couleur plus foncée au survol */
+            background-color: #e84118; 
         }
     </style>
 </head>
@@ -88,16 +88,15 @@
 
         function displayWords(wordsToDisplay) {
             const bannedWordsContainer = document.getElementById('bannedWordsContainer');
-            bannedWordsContainer.innerHTML = ''; // Vider le contenu précédent
+            bannedWordsContainer.innerHTML = ''; 
             wordsToDisplay.forEach(word => {
                 const wordDiv = document.createElement('div');
                 wordDiv.className = 'word';
                 wordDiv.textContent = word;
 
-                // Ajout d'un bouton pour supprimer le mot
                 const removeButton = document.createElement('button');
                 removeButton.textContent = 'delete';
-                removeButton.className = 'remove-button'; // Classe pour le style
+                removeButton.className = 'remove-button'; 
                 removeButton.onclick = () => removeWord(word);
                 wordDiv.appendChild(removeButton);
 
@@ -126,11 +125,11 @@
             });
 
             if (response.ok) {
-                bannedWords.push(newWord); // Ajouter le mot à la liste locale
+                bannedWords.push(newWord);
                 displayWords(bannedWords);
-                document.getElementById('add-word-bar').value = ''; // Réinitialiser le champ d'ajout
+                document.getElementById('add-word-bar').value = '';
             } else {
-                alert('Erreur lors de l\'ajout du mot.');
+                alert('Error while adding the word');
             }
         }
 
@@ -144,7 +143,7 @@
             });
 
             if (response.ok) {
-                bannedWords = bannedWords.filter(w => w !== word); // Mettre à jour la liste
+                bannedWords = bannedWords.filter(w => w !== word);
                 displayWords(bannedWords);
             } else {
                 alert('Erreur lors de la suppression du mot.');
