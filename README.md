@@ -14,7 +14,6 @@ This is a Discord moderation bot built using `discord.py`, pymongo and flask, wi
 ### Installation
 - Update `config.json` With **EVERYTHING**
     - **dev** and **admin**, are the id on discord of the dev and admin
-      (if you dont have any admin or dev for your bot, just let them empty)
 - Install the dependencies:
 - - ```pip install -r requirements.txt```
 
