@@ -19,7 +19,7 @@ This is a Discord moderation bot built using `discord.py` and MongoDB, with addi
 
 - start app.py
 - (url should be : http://127.0.0.1:5500)
-- - ''' pip install -r requirements.txt'''
+- - ```pip install -r requirements.txt```
 
 ## Usage
 
