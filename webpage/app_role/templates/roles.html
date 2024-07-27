@@ -34,7 +34,7 @@
         }
         .reset-button, .add-button {
             padding: 10px;
-            background-color: #7289da; /* Blue button color */
+            background-color: #7289da; 
             color: white;
             border: none;
             border-radius: 5px;
@@ -54,7 +54,6 @@
             </tr>
         </thead>
         <tbody id="roles-table-body">
-            <!-- Role rows will be added here dynamically -->
         </tbody>
     </table>
 
@@ -75,7 +74,7 @@
                     tableBody.appendChild(row);
                 });
             } catch (error) {
-                console.error('Erreur lors de la récupération des rôles :', error);
+                console.error('Erreur while getting role:', error);
             }
         }
 
