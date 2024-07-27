@@ -19,8 +19,12 @@ This is a Discord moderation bot built using `discord.py` and MongoDB, with addi
 
 - [Inscription MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
 - - create a cluster
-  - - create a collection **UR_COLLECTION_NAME**
-    - - 
+  - - create a database "**UR_DATABASE_NAME**"
+    - - create 4 collection :
+      - 1. "**FIRST_COLLECTION**"
+        2. "**SECOND_COLLECTION**"
+        3. "**THIRD_COLLECTION**"
+        4. "**FOURTH_COLLECTION**"
 
 ## (Optional) Run the web interface:
 
