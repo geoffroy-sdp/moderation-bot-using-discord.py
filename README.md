@@ -13,19 +13,20 @@ This is a Discord moderation bot built using `discord.py` and MongoDB, with addi
 
 ### Installation
 - Update `config.json` with your Discord bot token and MongoDB URI.
+    - **dev** and **admin**, are the id on discord of the dev and admin
+      (if you dont have any admin or dev for your bot, just let them empty)
 - Install the dependencies:
 
 ### Mongo DB setup
 
 - [Inscription MongoDB Atlas](https://www.mongodb.com/cloud/atlas/register)
 - - create a cluster
-  - - create a database "**UR_DATABASE_NAME**"
-    - - create 4 collection :
-        * "**FIRST_COLLECTION**"
-        * "**SECOND_COLLECTION**"
-        * "**THIRD_COLLECTION**"
-        * "**FOURTH_COLLECTION**"
-
+   - create a database "**UR_DATABASE_NAME**"
+    - create 4 collection :
+      * "**FIRST_COLLECTION**"
+      * "**SECOND_COLLECTION**"
+      * "**THIRD_COLLECTION**"
+      * "**FOURTH_COLLECTION**"
 ## (Optional) Run the web interface:
 
 - start app.py
