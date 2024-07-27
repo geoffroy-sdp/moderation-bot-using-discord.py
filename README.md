@@ -7,7 +7,7 @@ This is a Discord moderation bot built using `discord.py`, pymongo and flask, wi
 - **User Moderation**: Manage roles, warnings, and user history.
 - **Content Filtering**: Detect and manage banned words and alternative accounts.
 - **Database Integration**: Stores data in MongoDB for easy access and persistence.
-- **Web Interface**: Displays data such as banned words, user history, and role information.
+- **Web Interface**: Displays data such as banned words, sanctions history, command history, and role information.
 
 ## Setup
 
