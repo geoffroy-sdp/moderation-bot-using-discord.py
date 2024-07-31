@@ -1,6 +1,7 @@
 # Discord Moderation Bot
 
 This is a Discord moderation bot built using `discord.py`, pymongo and flask, with additional web pages for displaying database information.
+- This [webpage](https://moderation-bot-private.vercel.app/) explain the feature of the bot
 
 ## Features
 
@@ -39,7 +40,6 @@ gh repo clone Merzouz-ui/moderation-bot-using-discord.py
 
 - Use the commands in the `/command` directory to interact with the bot.
 - The web interface provides a way to view data like banned words and user histories.
-
 
 ## License
 
