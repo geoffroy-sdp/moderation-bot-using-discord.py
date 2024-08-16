@@ -23,7 +23,8 @@ from command import (
     # utils
     
     timeout_user,
-    is_alt_account
+    is_alt_account,
+    send_message_sanctions
 )
 
 from database.database import update_sanction_points, get_sanction_points, reset_sanction_points_member
@@ -133,8 +134,9 @@ async def on_message(message):
             await message.channel.send(f'{message.author.mention}, you are a helper/distro, respect the rules!')
             if point >= mute_threshold:
                 await message.channel.send(f'{message.author.mention}, you have been muted for {mute_duration} hours for reaching the sanction threshold.')
-                await message.author.send(f'You have been muted because you have too many warnings (3).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have been muted because you have too many warnings (3).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>')
                 await timeout_user(message.author, mute_duration)
+                await send_warning_message(message.author, point)
 
         else:
             update_sanction_points(message.author.id, message.author.name, 1)
@@ -143,26 +145,31 @@ async def on_message(message):
 
             if point == mute_threshold:
                 await message.channel.send(f'{message.author.mention}, you have been muted for {mute_duration} hours for reaching the sanction threshold.')
-                await message.author.send(f'You have been muted because you have too many warnings (3).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have been muted because you have too many warnings (3).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>')
                 await timeout_user(message.author, mute_duration)
+                await send_warning_message(message.author, point)
 
             elif point == longer_mute_threshold:
                 await message.channel.send(f'{message.author.mention}, you have been muted for {longer_mute_duration} hours for reaching the sanction threshold.')
-                await message.author.send(f'You have been muted because you have too many warnings (4).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have been muted because you have too many warnings (4).\nYou can contact an administrator if you want to complain about your mute.\n\nContact <@{contact_admin}>')
                 await timeout_user(message.author, longer_mute_duration)
+                await send_warning_message(message.author, point)
 
             elif point == kick_threshold:
-                await message.author.send(f'You have been kicked because you have too many warnings (5).\nYou can contact an administrator if you want to complain about your kick.\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have been kicked because you have too many warnings (5).\nYou can contact an administrator if you want to complain about your kick.\n\nContact <@{contact_admin}>')
                 await message.channel.send(f'{message.author.mention} has been kicked for too many warnings.')
                 await message.guild.kick(message.author, reason="Too many warnings")
+                await send_warning_message(message.author, point)
 
             elif point == warning_before_ban:
-                await message.author.send(f'You have 6 warnings. One more warning and you will be banned permanently!\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have 6 warnings. One more warning and you will be banned permanently!\n\nContact <@{contact_admin}>')
+                await send_warning_message(message.author, point)
             
             elif point == ban_threshold:
                 await message.channel.send(f'{message.author.mention} has been banned for too many warnings.')
-                await message.author.send(f'You have been banned because you have too many warnings (7).\nYou can contact an administrator if you want to complain about your ban.\n\nContact <@{contact_admin}>\n\n<@{dev}>(dev if you have issues with the bot)')
+                await message.author.send(f'You have been banned because you have too many warnings (7).\nYou can contact an administrator if you want to complain about your ban.\n\nContact <@{contact_admin}>')
                 await message.guild.ban(message.author, reason="Too many warnings")
+                await send_warning_message(message.author, point)
 
     await bot.process_commands(message)
 
