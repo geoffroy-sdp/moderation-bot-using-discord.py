@@ -34,11 +34,10 @@ gh repo clone https://github.com/geoffroy-sdp/moderation-bot-using-discord.py.gi
 ## (Optional) Run the web interface:
 
 - start app.py
-- (url should be : http://127.0.0.1:5500)
 
 ## Usage
 
-- Use the commands in the `/command` directory to interact with the bot.
+- Use the commands on discord to interact with the bot.
 - The web interface provides a way to view data like banned words and user histories.
 
 ## License
